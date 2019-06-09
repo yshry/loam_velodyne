@@ -29,6 +29,7 @@ catkin_package(
 
 ## Compile as C++14, supported in ROS Kinetic and newer
 # set_property(TARGET invz_player PROPERTY CXX_STANDARD 17)
+#set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 

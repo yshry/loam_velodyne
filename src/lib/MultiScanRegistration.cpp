@@ -171,6 +171,8 @@ void MultiScanRegistration::process(const pcl::PointCloud<pcl::PointXYZ>& laserC
     endOri += 2 * M_PI;
   }
 
+  ROS_INFO("startOri: %g; endOri: %g; cloudSize: %d", startOri/M_PI, endOri/M_PI, cloudSize);
+
   bool halfPassed = false;
   pcl::PointXYZI point;
   _laserCloudScans.resize(_scanMapper.getNumberOfScanRings());
