@@ -149,7 +149,7 @@ void MultiScanRegistration::handleCloudMessage(const sensor_msgs::PointCloud2Con
   }
 
   // fetch new input cloud
-  pcl::PointCloud<pcl::PointXYZ> laserCloudIn;
+  pcl::PointCloud<pcl::PointXYZI> laserCloudIn;
   pcl::fromROSMsg(*laserCloudMsg, laserCloudIn);
 
   process(laserCloudIn, fromROSTime(laserCloudMsg->header.stamp));
@@ -157,7 +157,7 @@ void MultiScanRegistration::handleCloudMessage(const sensor_msgs::PointCloud2Con
 
 
 
-void MultiScanRegistration::process(const pcl::PointCloud<pcl::PointXYZ>& laserCloudIn, const Time& scanTime)
+void MultiScanRegistration::process(const pcl::PointCloud<pcl::PointXYZI>& laserCloudIn, const Time& scanTime)
 {
   size_t cloudSize = laserCloudIn.size();
 
@@ -229,6 +229,7 @@ void MultiScanRegistration::process(const pcl::PointCloud<pcl::PointXYZ>& laserC
     // calculate relative scan time based on point orientation
     float relTime = config().scanPeriod * (ori - startOri) / (endOri - startOri);
     point.intensity = scanID + relTime;
+    //point.intensity = laserCloudIn[i].intensity;
 
     projectPointToStartOfSweep(point, relTime);
 
